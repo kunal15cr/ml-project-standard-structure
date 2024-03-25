@@ -3,9 +3,13 @@ import sys
 from exception import CustomException
 from logger import logging
 
+from components.model_trainer import ModelTraingConfig
+from components.model_trainer import ModelTrainer
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
+from components.data_trnsformation import DataTransformation
 
 
 @dataclass
@@ -46,5 +50,14 @@ class DataIngestionConfig:
             
 if __name__ == "__main__":
     obj = DataIngestionConfig()
-    obj.initiate_data_ingestion()
+    train_data,test_data =obj.initiate_data_ingestion()
+    
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_transformation(train_data,test_data)
+    
+    train_arr,test_arr,_=data_transformation.initiate_data_transformation(train_data,test_data)
+    
+    modeltraner = ModelTrainer()
+    print(modeltraner.initiate_model_trainer(train_arr,test_arr))
+    
     
