@@ -9,6 +9,9 @@ import pandas as pd
 from exception import CustomException
 from logger import logging
 from sklearn.metrics import r2_score
+from sklearn.model_selection import GridSearchCV
+
+from exception import CustomException
 
 
 
